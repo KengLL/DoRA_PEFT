@@ -5,15 +5,15 @@ CS 5782 Final Project. A reproduction study of **DoRA: Weight-Decomposed Low-Ran
 
 ## Introduction
 
-Fine-tuning is essential for adapting models to downstream tasks. Traditional full fine-tuning requires updating all parameters, which becomes expensive as model sizes grow, motivating the development of parameter-efficient fine-tuning (PEFT) methods like Low-Rank Adaptation (LoRA), which take a small subset of parameters for adapting to downstream tasks [2]. While LoRA addressed this by injecting trainable low-rank matrices, it falls short of full fine-tuning performance due to its coupled treatment of weight magnitude and direction.
+Fine-tuning large language models is expensive because it requires updating all model parameters. Parameter-efficient fine-tuning (PEFT) methods such as LoRA reduce this cost by training low-rank adapters, but LoRA couples weight magnitude and direction, limiting performance relative to full fine-tuning [2].
 
-To solve this problem, DoRA: Weight-Decomposed Low-Rank Adaptation by Liu et al. was proposed [1]. DoRA decomposes pretrained weights into magnitude and direction components, tuning each independently. This decomposition allows DoRA to more closely mirror the learning behavior of full fine-tuning compared to LoRA with negligible additional overhead. This project reproduces the results of DoRA from Liu et al.
+DoRA (Liu et al., 2024) addresses this limitation by decomposing pretrained weights into separate magnitude and direction components and tuning them independently [1]. This project reproduces DoRA’s reported improvements over LoRA on commonsense reasoning benchmarks.
 
 ## Chosen Result
 
-We chose to reproduce the accuracy of the LoRA baseline and DoRA on 8 commonsense reasoning tasks (BoolQ, PIQA, SIQA, HellaSwag, WinoGrande, ARC-e/c, OBQA) — a subset of Table 1 of the original paper. These results are significant in the paper because they show that DoRA surpasses all baseline methods and outperforms LoRA by ~3.7% on average. Beyond accuracy numbers, we chose this result because it directly validates the paper's core claim: that decoupling magnitude and direction allows the model to more closely mirror full fine-tuning, with the benefit most pronounced under constrained parameter budgets where LoRA's coupling becomes most restrictive.
+We reproduced the LoRA and DoRA results on 8 commonsense reasoning tasks: BoolQ, PIQA, SIQA, HellaSwag, WinoGrande, ARC-e/c, and OBQA — a subset of Table 1 from the original paper.
 
-We also chose to reproduce the LoRA and DoRA magnitude and direction updates shown in Figure 2 of the original paper.
+We also reproduced the magnitude/direction update behavior from Figure 2, validating the paper’s core claim that DoRA better decouples weight magnitude and direction than LoRA, especially at low ranks.
 
 ## GitHub Contents
 
