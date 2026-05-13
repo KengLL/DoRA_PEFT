@@ -55,8 +55,6 @@ Caveats:
 
 ## Results / Insights
 
-From the draft report:
-
 -   The average accuracy of our DoRA implementation across the 8 commonsense reasoning tasks exceeds the LoRA baseline across all of ranks 8, 4, 2. The difference is minimal at rank 8 and more significant at rank 2.
 -   Rank 16 was initially tested to match the original paper, but the performance gap was minimal — possibly due to capacity saturation of the 1B model leaving little room for DoRA's decomposition to help. Reducing the rank surfaced more visible LoRA / DoRA differences.
 -   Variance across seeded runs causes overlaps between LoRA and DoRA in some per-benchmark cases, so not every observed gap is statistically significant.
@@ -65,7 +63,7 @@ From the draft report:
 
 ## Conclusion
 
-From our experiment, DoRA consistently outperforms LoRA across all ranks while only adding marginal extra parameters over LoRA — a negligible overhead. The gap widens at low rank (r = 2), where LoRA degrades more. DoRA is a drop-in replacement for LoRA with no architecture change required, making it a simple accuracy booster.
+From our experiment, DoRA consistently outperforms LoRA across all ranks while only adding marginal extra parameters over LoRA — a negligible overhead. The gap widens at low rank (r = 2), where LoRA degrades more. DoRA is a drop-in replacement for LoRA with no architecture change required, making it a simple accuracy booster. We learned that higher ranks for small models could experience capacity saturation, reducing DoRA’s benefits. Fine-tuning is sensitive to initialization, especially at lower ranks. 
 
 For future directions, we hope to continue to investigate other PEFT methods, such as magnitude-aware PEFT methods (MAP). We also hope to extend the investigation to domains beyond text — including vision and audio — to assess whether DoRA's advantages persist across modalities.
 
@@ -74,5 +72,5 @@ For future directions, we hope to continue to investigate other PEFT methods, su
 1.  Liu et al. (2024). _DoRA: Weight-Decomposed Low-Rank Adaptation._ arXiv:2402.09353.
 2.  Hu et al. (2022). _LoRA: Low-Rank Adaptation of Large Language Models._ ICLR 2022.
 3.  Meta AI (2024). _Llama 3.2._ Hugging Face.
+4.  He, Z. (2024). Commonsense170K. 
 
-## Team members
